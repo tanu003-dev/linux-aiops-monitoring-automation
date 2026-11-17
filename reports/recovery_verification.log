@@ -1,0 +1,42 @@
+
+PLAY [AIOps Remediation and Recovery Verification] *****************************
+
+TASK [Detect simulated high CPU incident] **************************************
+ok: [localhost]
+
+TASK [Display detected incident] ***********************************************
+ok: [localhost] => {
+    "msg": "Initial status: WARNING | CPU: 95.0%"
+}
+
+TASK [Create harmless test file] ***********************************************
+changed: [localhost]
+
+TASK [Execute approved test remediation] ***************************************
+changed: [localhost]
+
+TASK [Verify test remediation] *************************************************
+ok: [localhost]
+
+TASK [Check actual server health after remediation] ****************************
+ok: [localhost]
+
+TASK [Display recovery verification] *******************************************
+ok: [localhost] => {
+    "msg": [
+        "Test file absent: True",
+        "Actual CPU: 1.5%",
+        "Actual server status: OK"
+    ]
+}
+
+TASK [Confirm workflow result] *************************************************
+ok: [localhost] => {
+    "msg": "WORKFLOW SUCCESS: Test remediation verified and health API checked."
+}
+
+TASK [Report recovery verification failure] ************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=8    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0

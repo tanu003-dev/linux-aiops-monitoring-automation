@@ -1,0 +1,24 @@
+---
+- name: Test AIOps Remediation
+  hosts: local
+  connection: local
+  become: false
+
+  vars:
+    simulated_cpu: 90
+
+  tasks:
+
+    - name: Display simulated CPU
+      debug:
+        msg: "Simulated CPU usage: {{ simulated_cpu }}%"
+
+    - name: Trigger remediation
+      shell: |
+        echo "$(date) - TEST HIGH CPU ALERT - Remediation triggered at {{ simulated_cpu }}%" >> remediation.log
+      when: simulated_cpu | float > 80
+
+    - name: Display remediation result
+      debug:
+        msg: "TEST SUCCESS: High CPU remediation was triggered."
+      when: simulated_cpu | float > 80

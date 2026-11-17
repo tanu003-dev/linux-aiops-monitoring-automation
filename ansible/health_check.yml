@@ -1,0 +1,48 @@
+---
+- name: Linux Server Health Monitoring
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Get CPU usage
+      ansible.builtin.shell: |
+        top -bn1 | awk '/Cpu\(s\)/ {print 100 - $8}'
+      register: cpu_result
+      changed_when: false
+
+    - name: Get memory usage
+      ansible.builtin.shell: |
+        free | awk '/Mem:/ {printf "%.0f", $3/$2 * 100}'
+      register: memory_result
+      changed_when: false
+
+    - name: Get disk usage
+      ansible.builtin.shell: |
+        df / | awk 'NR==2 {print $5}' | tr -d '%'
+      register: disk_result
+      changed_when: false
+
+    - name: Display health values
+      ansible.builtin.debug:
+        msg:
+          - "CPU Usage: {{ cpu_result.stdout }}%"
+          - "Memory Usage: {{ memory_result.stdout }}%"
+          - "Disk Usage: {{ disk_result.stdout }}%"
+
+    - name: Check server health
+      ansible.builtin.debug:
+        msg: "SERVER STATUS: WARNING"
+      when: >
+        (cpu_result.stdout | float >= 80) or
+        (memory_result.stdout | float >= 80) or
+        (disk_result.stdout | float >= 80)
+
+    - name: Server is healthy
+      ansible.builtin.debug:
+        msg: "SERVER STATUS: OK"
+      when: >
+        (cpu_result.stdout | float < 80) and
+        (memory_result.stdout | float < 80) and
+        (disk_result.stdout | float < 80)

@@ -1,0 +1,16 @@
+---
+- name: Safe AIOps Remediation Test
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Remove test file
+      ansible.builtin.file:
+        path: /tmp/aiops_test_file
+        state: absent
+
+    - name: Confirm remediation
+      ansible.builtin.debug:
+        msg: "Remediation completed: /tmp/aiops_test_file removed"

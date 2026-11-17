@@ -1,0 +1,33 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Backup files
+*.bak
+*.backup
+
+# Environment secrets
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.log.tmp
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Generated Ansible logs
+/ansible/remediation.log
+
+# Python cache directories
+__pycache__/

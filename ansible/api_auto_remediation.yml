@@ -1,0 +1,39 @@
+---
+- name: AIOps API Automatic Remediation
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Get server health from Flask API
+      ansible.builtin.uri:
+        url: "http://localhost:5000/health?simulate_warning=true"
+        method: GET
+        return_content: true
+      register: health_api
+
+    - name: Display current server health
+      ansible.builtin.debug:
+        msg:
+          - "Hostname: {{ health_api.json.hostname }}"
+          - "CPU: {{ health_api.json.cpu_usage }}%"
+          - "Memory: {{ health_api.json.memory_usage }}%"
+          - "Disk: {{ health_api.json.disk_usage }}%"
+          - "Status: {{ health_api.json.status }}"
+
+    - name: Server is healthy
+      ansible.builtin.debug:
+        msg: "SERVER STATUS: OK - No remediation required"
+      when: health_api.json.status == "OK"
+
+    - name: Automatic remediation
+      ansible.builtin.file:
+        path: /tmp/aiops_test_file
+        state: absent
+      when: health_api.json.status == "WARNING"
+
+    - name: Confirm automatic remediation
+      ansible.builtin.debug:
+        msg: "AUTOMATIC REMEDIATION COMPLETED"
+      when: health_api.json.status == "WARNING"

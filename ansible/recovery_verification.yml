@@ -1,0 +1,63 @@
+---
+- name: AIOps Remediation and Recovery Verification
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Detect simulated high CPU incident
+      ansible.builtin.uri:
+        url: "http://127.0.0.1:5000/health?simulate_warning=true"
+        method: GET
+        return_content: true
+      register: initial_health
+
+    - name: Display detected incident
+      ansible.builtin.debug:
+        msg: "Initial status: {{ initial_health.json.status }} | CPU: {{ initial_health.json.cpu_usage }}%"
+
+    - name: Create harmless test file
+      ansible.builtin.file:
+        path: /tmp/aiops_recovery_test
+        state: touch
+        mode: "0600"
+      when: initial_health.json.status == "WARNING"
+
+    - name: Execute approved test remediation
+      ansible.builtin.file:
+        path: /tmp/aiops_recovery_test
+        state: absent
+      when: initial_health.json.status == "WARNING"
+
+    - name: Verify test remediation
+      ansible.builtin.stat:
+        path: /tmp/aiops_recovery_test
+      register: remediation_check
+
+    - name: Check actual server health after remediation
+      ansible.builtin.uri:
+        url: "http://127.0.0.1:5000/health"
+        method: GET
+        return_content: true
+      register: recovery_health
+
+    - name: Display recovery verification
+      ansible.builtin.debug:
+        msg:
+          - "Test file absent: {{ not remediation_check.stat.exists }}"
+          - "Actual CPU: {{ recovery_health.json.cpu_usage }}%"
+          - "Actual server status: {{ recovery_health.json.status }}"
+
+    - name: Confirm workflow result
+      ansible.builtin.debug:
+        msg: "WORKFLOW SUCCESS: Test remediation verified and health API checked."
+      when:
+        - not remediation_check.stat.exists
+        - recovery_health.json.status == "OK"
+
+    - name: Report recovery verification failure
+      ansible.builtin.fail:
+        msg: "Recovery verification failed. Investigate the server."
+      when:
+        - remediation_check.stat.exists or recovery_health.json.status != "OK"

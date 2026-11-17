@@ -1,0 +1,37 @@
+---
+- name: Linux Auto Remediation
+  hosts: local
+  connection: local
+  become: false
+
+  tasks:
+
+    - name: Check current CPU usage
+      shell: |
+        top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}'
+      register: cpu_usage
+      changed_when: false
+
+    - name: Display CPU usage
+      debug:
+        msg: "Current CPU usage: {{ cpu_usage.stdout }}%"
+
+    - name: Create remediation log
+      shell: |
+        echo "$(date) - CPU usage checked: {{ cpu_usage.stdout }}%" >> remediation.log
+      changed_when: true
+
+    - name: Trigger high CPU remediation
+      shell: |
+        echo "$(date) - HIGH CPU ALERT - Remediation triggered at {{ cpu_usage.stdout }}%" >> remediation.log
+      when: cpu_usage.stdout | float > 80
+
+    - name: Display remediation status
+      debug:
+        msg: "CPU is high. Remediation triggered."
+      when: cpu_usage.stdout | float > 80
+
+    - name: Display healthy status
+      debug:
+        msg: "CPU is within normal range. No remediation required."
+      when: cpu_usage.stdout | float <= 80

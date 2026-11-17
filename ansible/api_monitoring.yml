@@ -1,0 +1,33 @@
+---
+- name: AIOps Monitoring Through REST API
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Get health data from Flask API
+      ansible.builtin.uri:
+        url: http://localhost:5000/health
+        method: GET
+        return_content: true
+      register: health_api
+
+    - name: Display API health data
+      ansible.builtin.debug:
+        msg:
+          - "Hostname: {{ health_api.json.hostname }}"
+          - "CPU Usage: {{ health_api.json.cpu_usage }}%"
+          - "Memory Usage: {{ health_api.json.memory_usage }}%"
+          - "Disk Usage: {{ health_api.json.disk_usage }}%"
+          - "Status: {{ health_api.json.status }}"
+
+    - name: Check server status
+      ansible.builtin.debug:
+        msg: "SERVER STATUS: WARNING"
+      when: health_api.json.status == "WARNING"
+
+    - name: Server is healthy
+      ansible.builtin.debug:
+        msg: "SERVER STATUS: OK"
+      when: health_api.json.status == "OK"

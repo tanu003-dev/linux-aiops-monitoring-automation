@@ -1,0 +1,12 @@
+timestamp,cpu,memory,disk,processes,prediction,anomaly_score,status,resource_status,incident,priority
+2026-10-28 06:31:20.643180,1.3,22.5,0.6,45,-1,-0.2060403130057523,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 06:31:44.694995,2.0,22.0,0.6,43,-1,-0.0209231460877797,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 06:33:08.868370,5.5,21.6,0.6,43,-1,-0.1758302114103563,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 06:33:14.877468,0.5,21.1,0.6,45,-1,-0.1518182787593173,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 06:33:39.025869,3.0,20.8,0.6,43,-1,-0.0150941561767842,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 06:38:53.678089,1.3,20.5,0.6,45,-1,-0.1037212898982985,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 06:38:59.733316,4.8,20.5,0.6,45,-1,-0.1912128213816654,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 06:39:05.741506,1.0,20.5,0.6,42,-1,-0.0829850125524606,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 07:15:29.854250,2.8,20.4,0.6,42,-1,-0.0103043393041242,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 07:15:44.864727,3.0,20.4,0.6,42,-1,-0.0194050917862312,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW
+2026-10-28 07:15:49.868966,4.0,20.4,0.6,42,-1,-0.1102692032213451,ANOMALY,OK,Unusual metrics pattern; investigate,REVIEW

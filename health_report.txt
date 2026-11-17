@@ -1,0 +1,37 @@
+===== SERVER HEALTH REPORT =====
+Date:
+Thu Oct  1 07:41:41 UTC 2026
+Hostname:
+DESKTOP-AHRK9A5
+Current User:
+tanu
+Current User:
+Operating System:
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+Kernel:
+6.18.40.1-microsoft-standard-WSL2
+Memory:
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       515Mi       3.2Gi       4.0Mi       181Mi       3.3Gi
+Swap:          1.0Gi          0B       1.0Gi
+Disk:
+Filesystem      Size  Used Avail Use% Mounted on
+none            1.9G     0  1.9G   0% /usr/lib/modules/6.18.40.1-microsoft-standard-WSL2
+none            1.9G  4.0K  1.9G   1% /mnt/wsl
+drivers         282G   99G  183G  36% /usr/lib/wsl/drivers
+/dev/sdd       1007G  3.1G  953G   1% /
+none            1.9G   36K  1.9G   1% /mnt/wslg
+none            1.9G     0  1.9G   0% /usr/lib/wsl/lib
+rootfs          1.9G  3.3M  1.9G   1% /init
+none            1.9G  472K  1.9G   1% /run
+none            1.9G     0  1.9G   0% /run/lock
+none            1.9G     0  1.9G   0% /run/shm
+none            1.9G   80K  1.9G   1% /mnt/wslg/versions.txt
+none            1.9G   80K  1.9G   1% /mnt/wslg/doc
+C:\             282G   99G  183G  36% /mnt/c
+D:\             196G  378M  195G   1% /mnt/d
+tmpfs           1.9G     0  1.9G   0% /tmp
+none            1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+none            1.0M     0  1.0M   0% /run/credentials/systemd-resolved.service
+none            1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           386M   12K  386M   1% /run/user/1000
