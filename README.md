@@ -239,3 +239,6 @@ The dashboard provides real-time Linux infrastructure monitoring,
 including CPU, memory, disk, process count, and AI anomaly detection.
 
 ![Linux AIOps Grafana Dashboard](screenshots/grafana-dashboard.png)
+## System Architecture
+
+![AI-Powered Linux AIOps Architecture](screenshots/AI-Powered Linux Monitoring Architecture.png)
