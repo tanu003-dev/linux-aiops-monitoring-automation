@@ -233,3 +233,9 @@ The test verifies the automation workflow, not actual CPU remediation.
 ## Project Objective
 
 The objective is to demonstrate practical skills in Linux administration, infrastructure monitoring, Python automation, machine learning, Ansible, and AIOps workflows through a hands-on portfolio project.
+## Grafana Monitoring Dashboard
+
+The dashboard provides real-time Linux infrastructure monitoring,
+including CPU, memory, disk, process count, and AI anomaly detection.
+
+![Linux AIOps Grafana Dashboard](screenshots/grafana-dashboard.png)
