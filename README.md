@@ -144,7 +144,7 @@ project1-server-health/
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/tanu003-dev/linux-aiops-monitoring-automation.git
 cd project1-server-health
 ```
 
